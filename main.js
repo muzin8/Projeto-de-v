@@ -1,11 +1,14 @@
-const botoes = document.querySelectorAll(".botao");
+document.addEventListener("DOMContentLoaded", () => {
+  const botoes = document.querySelectorAll(".botao");
 
-for (let i = 0; i < botoes.length; i++) {
-  botoes[i].onclick = function () {
-    for (let j = 0; j < botoes.length; j++) {
-      botoes[j].classList.remove("ativo");
-    }
+  if (botoes.length === 0) return;
 
-    botoes[i].classList.add("ativo");
-  };
-}
+  botoes.forEach((botao) => {
+    botao.addEventListener("click", () => {
+      botoes.forEach((btn) => btn.classList.remove("ativo"));
+      botao.classList.add("ativo");
+    });
+  });
+
+  botoes[0].classList.add("ativo");
+});
