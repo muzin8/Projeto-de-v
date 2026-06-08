@@ -17,19 +17,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   ativarAba(0);
 });
-for (let i = 0; i < botoes.length; i++) {
-  botoes[i].onclick = function () {
-    for (let j = 0; j < botoes.length; j++) {
-      botoes[j].classList.remove("ativo");
-      textos[j].classList.remove("ativo");
-    }
+// Countdown timers for each .contador element using data-target attribute
+function calculaTempoParaTexto(dataAlvo) {
+  const agora = new Date();
+  const alvo = new Date(dataAlvo);
+  const diff = alvo - agora;
+  if (diff <= 0) return "Objetivo atingido";
 
-    botoes[i].classList.add("ativo");
-    textos[i].classList.add("ativo");
-  };
+  let segundos = Math.floor(diff / 1000);
+  const dias = Math.floor(segundos / (24 * 3600));
+  segundos -= dias * 24 * 3600;
+  const horas = Math.floor(segundos / 3600);
+  segundos -= horas * 3600;
+  const minutos = Math.floor(segundos / 60);
+  segundos -= minutos * 60;
+
+  return `${dias} dias ${horas} horas ${minutos} minutos ${segundos} segundos`;
 }
-const contadores = document.querySelectorAll(".contador");
-const tempoObjetivo1 = new Date("2023-10-05T00:00:00");
-let tempoAtual = new Date();
 
-contadores[0].textContent = tempoObjetivo1 - tempoAtual;
+function atualizarContadores() {
+  const contadores = document.querySelectorAll(".contador");
+  contadores.forEach((el) => {
+    const alvo = el.dataset.target;
+    if (!alvo) return;
+    el.textContent = calculaTempoParaTexto(alvo);
+  });
+}
+
+// Atualiza imediatamente e a cada segundo
+atualizarContadores();
+setInterval(atualizarContadores, 1000);

@@ -44,7 +44,7 @@ body {
   padding: 1em;
   font-size: 18px;
   align-items: center;
-  width: 100%;
+  width: auto;
   border-bottom: 4px solid var(--botao-ativo);
   border-left: 2px solid var(--botao-ativo);
   border-right: 2px solid var(--botao-ativo);
@@ -64,15 +64,20 @@ body {
 }
 
 .botoes {
-  display: block;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
 }
 
 .abas-textos {
   background-color: var(--texto-fundo);
-  padding: 40px;
+  padding: 40px 30px;
   border-radius: 0 0 40px 40px;
+  margin-top: 0.5rem;
+  width: 100%;
+  max-width: 900px;
 }
 
 .aba-conteudo {
@@ -85,10 +90,14 @@ body {
 
 @media screen and (min-width: 768px) {
   .botoes {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    justify-content: flex-start;
     gap: 1rem;
   }
+  .contador {
+  font-size: 20px;
+  text-align: center;
+}
 
   .botao:first-child {
     border-radius: 40px 0 0 0;
